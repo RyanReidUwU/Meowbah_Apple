@@ -11,6 +11,31 @@ struct ArtView: View {
         let category: String
     }
 
+    // Publishes the art catalog to the App Group for watch access
+    private func publishArtCatalogToAppGroup(_ items: [FanArt]) {
+        let payload: [[String: Any]] = items.map { item in
+            [
+                "id": item.id,
+                "title": item.title,
+                // Use category as description for now
+                "description": item.category,
+                // Local iOS asset name
+                "imageName": item.imageName,
+                // No remote URL; watch will request bytes from iPhone
+                "imageURL": "",
+                // Optional deep link / URL (leave empty for now)
+                "url": ""
+            ]
+        }
+
+        guard let data = try? JSONSerialization.data(withJSONObject: payload),
+              let json = String(data: data, encoding: .utf8)
+        else { return }
+
+        let defaults = UserDefaults(suiteName: "group.meowbah") ?? .standard
+        defaults.set(json, forKey: "art.catalogJSON")
+    }
+
     @State private var fanArts: [FanArt] = [
         FanArt(id: "1", imageName: "quran", title: "Meow Reads The Quran", category: "Animation"),
         FanArt(id: "2", imageName: "friends", title: "Meow and CommotionSickness", category: "Commotion"),
@@ -30,118 +55,259 @@ struct ArtView: View {
 
     @State private var selectedFanArt: FanArt?
 
-    @EnvironmentObject private var theme: ThemeManager
-    @Environment(\.colorScheme) private var colorScheme
+#if os(tvOS)
+    init() {
+        #if canImport(UIKit)
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .black
+
+        UITabBar.appearance().isTranslucent = false
+        UITabBar.appearance().standardAppearance = appearance
+        if #available(tvOS 15.0, *) {
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+        }
+        #endif
+    }
+#endif
+
+    private var secondaryBG: Color {
+        #if os(tvOS)
+        return Color.black.opacity(0.2)
+        #else
+        return Color(.secondarySystemBackground)
+        #endif
+    }
+
+    private var systemBG: Color {
+        #if os(tvOS)
+        return Color.black
+        #else
+        return Color(.systemBackground)
+        #endif
+    }
+
+    @ViewBuilder
+    private func header() -> some View {
+        HStack(alignment: .center, spacing: 12) {
+            Image(systemName: "scribble.variable")
+                .font(.system(size: 28, weight: .semibold))
+                .foregroundStyle(Color.primary)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Discover Art")
+                    .font(.title2).bold()
+                    .foregroundStyle(Color.primary)
+
+                Text("Here is some kawaii art from Meowbah (more coming soon)")
+                    .font(.subheadline)
+                    .foregroundStyle(Color.secondary)
+            }
+
+            Spacer()
+        }
+    }
 
     var body: some View {
-        let palette = theme.palette(for: colorScheme)
+#if os(tvOS)
+        ZStack {
+            // Match VideosView: paint background and ignore safe areas.
+            Color.black.ignoresSafeArea()
 
+            VStack(spacing: 0) {
+                // Grid (match VideosView tvOS grid pattern)
+                ScrollView {
+                    LazyVGrid(columns: [
+                        GridItem(.flexible(), spacing: 48),
+                        GridItem(.flexible(), spacing: 48)
+                    ], spacing: 48) {
+                        ForEach(fanArts) { item in
+                            Button {
+                                selectedFanArt = item
+                            } label: {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(secondaryBG)
+                                        .overlay(
+                                            ZStack {
+                                                LinearGradient(
+                                                    colors: [Color.primary.opacity(0.12), secondaryBG.opacity(0.2)],
+                                                    startPoint: .topLeading,
+                                                    endPoint: .bottomTrailing
+                                                )
+                                                .allowsHitTesting(false)
+
+#if canImport(UIKit)
+                                                if let uiImage = UIImage(named: item.imageName) {
+                                                    Image(uiImage: uiImage)
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .padding(8)
+                                                } else {
+                                                    Image(systemName: "photo")
+                                                        .font(.system(size: 28))
+                                                        .foregroundStyle(Color.secondary)
+                                                        .opacity(0.15)
+                                                }
+#else
+                                                Image(item.imageName)
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .padding(8)
+#endif
+                                            }
+                                        )
+                                        .aspectRatio(1, contentMode: .fit)
+                                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+
+                                    Text(item.title)
+                                        .font(.headline)
+                                        .foregroundStyle(Color.primary)
+                                        .lineLimit(2)
+                                }
+                                .padding(8)
+                                .background(secondaryBG)
+                                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                                .shadow(radius: 4, y: 2)
+                                .contentShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .padding(.horizontal, 40)
+                    .padding(.vertical, 28)
+                }
+                .background(Color.black)
+                .scrollClipDisabled(true)
+            }
+        }
+        .toolbarBackground(.visible, for: .tabBar)
+        .toolbarBackground(.black, for: .tabBar)
+        .toolbarColorScheme(.dark, for: .tabBar)
+        .fullScreenCover(item: $selectedFanArt) { art in
+            FanArtDetailSheet(art: art)
+        }
+        .onAppear {
+            publishArtCatalogToAppGroup(fanArts)
+        }
+#else
+        // Non-tvOS keeps the previous layout.
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                header(palette: palette)
-
+            LazyVStack(spacing: 0) {
+                header()
+                    .padding(.horizontal, 16)
+                    .padding(.top, 16)
+                    .padding(.bottom, 12)
+                    .background(systemBG)
                 LazyVGrid(columns: [
                     GridItem(.flexible(), spacing: 16),
                     GridItem(.flexible(), spacing: 16)
                 ], spacing: 16) {
                     ForEach(fanArts) { item in
-                        VStack(alignment: .leading, spacing: 8) {
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(palette.card)
-                                .overlay(
-                                    ZStack {
-                                        LinearGradient(colors: [palette.primary.opacity(0.25), palette.card.opacity(0.2)], startPoint: .topLeading, endPoint: .bottomTrailing)
+                        Button {
+                            selectedFanArt = item
+                        } label: {
+                            VStack(alignment: .leading, spacing: 8) {
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(secondaryBG)
+                                    .overlay(
+                                        ZStack {
+                                            LinearGradient(
+                                                colors: [Color.primary.opacity(0.12), secondaryBG.opacity(0.2)],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            )
                                             .allowsHitTesting(false)
 
-                                        
 #if canImport(UIKit)
-                                        if let uiImage = UIImage(named: item.imageName) {
-                                            Image(uiImage: uiImage)
+                                            if let uiImage = UIImage(named: item.imageName) {
+                                                Image(uiImage: uiImage)
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .padding(8)
+                                            } else {
+                                                Image(systemName: "photo")
+                                                    .font(.system(size: 28))
+                                                    .foregroundStyle(Color.secondary)
+                                                    .opacity(0.15)
+                                            }
+#else
+                                            Image(item.imageName)
                                                 .resizable()
                                                 .scaledToFit()
                                                 .padding(8)
-                                        } else {
-                                            Image(systemName: "photo")
-                                                .font(.system(size: 28))
-                                                .foregroundStyle(palette.textSecondary)
-                                                .opacity(0.15)
-                                        }
-#else
-                                        Image(item.imageName)
-                                            .resizable()
-                                            .scaledToFit()
-                                            .padding(8)
 #endif
-                                    }
-                                )
-                                .aspectRatio(1, contentMode: .fit)
-                                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                                        }
+                                    )
+                                    .aspectRatio(1, contentMode: .fit)
+                                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
 
-                            Text(item.title)
-                                .font(.headline)
-                                .foregroundStyle(palette.textPrimary)
-                                .lineLimit(2)
+                                Text(item.title)
+                                    .font(.headline)
+                                    .foregroundStyle(Color.primary)
+                                    .lineLimit(2)
+                            }
+                            .padding(8)
+                            .background(secondaryBG)
+                            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                            .shadow(radius: 4, y: 2)
+                            .contentShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                         }
-                        .padding(8)
-                        .background(palette.card)
-                        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-                        .shadow(radius: 4, y: 2)
-                        .contentShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-                        .onTapGesture {
-                            selectedFanArt = item
-                        }
+                        .buttonStyle(.plain)
                     }
                 }
-                .padding(.top, 8)
+                .padding(.horizontal, 16)
+                .padding(.top, 16)
+                .padding(.bottom, 16)
             }
-            .padding(16)
         }
-        .background(palette.background.ignoresSafeArea())
+        .background(systemBG.ignoresSafeArea())
         .sheet(item: $selectedFanArt) { art in
             FanArtDetailSheet(art: art)
-                .environmentObject(theme)
-                .presentationDragIndicator(.visible)
+#if os(iOS)
+            #if targetEnvironment(macCatalyst)
+            .presentationDragIndicator(.hidden)
+            #else
+            .presentationDetents([.large])
+            .presentationDragIndicator(.hidden)
+            #endif
+#endif
         }
-    }
-
-    @ViewBuilder
-    private func header(palette: ThemePalette) -> some View {
-        HStack(alignment: .center, spacing: 12) {
-            Image(systemName: "scribble.variable")
-                .font(.system(size: 28, weight: .semibold))
-                .foregroundStyle(palette.primary)
-            VStack(alignment: .leading, spacing: 2) {
-                Text("Discover Art")
-                    .font(.title2).bold()
-                    .foregroundStyle(palette.textPrimary)
-                Text("Curated kawaii illustrations and concepts")
-                    .font(.subheadline)
-                    .foregroundStyle(palette.textSecondary)
-            }
-            Spacer()
+        .onAppear {
+            publishArtCatalogToAppGroup(fanArts)
         }
+#endif
     }
 }
 
 private struct FanArtDetailSheet: View {
     let art: ArtView.FanArt
 
-    @EnvironmentObject private var theme: ThemeManager
-    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.dismiss) private var dismiss
+
+    private var secondaryBG: Color {
+        #if os(tvOS)
+        return Color.black.opacity(0.2)
+        #else
+        return Color(.secondarySystemBackground)
+        #endif
+    }
 
     var body: some View {
-        let palette = theme.palette(for: colorScheme)
-
         NavigationStack {
             ZStack {
-                palette.background.ignoresSafeArea()
+#if os(tvOS)
+                Color.black.ignoresSafeArea()
+#else
+                Color(.systemBackground).ignoresSafeArea()
+#endif
 
                 GeometryReader { geo in
                     let w = max(0, geo.size.width - 32)
                     let h = max(0, geo.size.height - 32)
                     ZStack {
                         RoundedRectangle(cornerRadius: 16)
-                            .fill(palette.card)
+                            .fill(secondaryBG)
 
 #if canImport(UIKit)
                         if let uiImage = UIImage(named: art.imageName) {
@@ -153,7 +319,7 @@ private struct FanArtDetailSheet: View {
                         } else {
                             Image(systemName: "photo")
                                 .font(.system(size: 44))
-                                .foregroundStyle(palette.textSecondary)
+                                .foregroundStyle(Color.secondary)
                                 .opacity(0.25)
                         }
 #else
@@ -169,9 +335,43 @@ private struct FanArtDetailSheet: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            
+#if !os(tvOS)
+            #if targetEnvironment(macCatalyst)
+            .navigationTitle("Art")
+            #else
             .navigationTitle(art.title)
+            #endif
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Label("Close", systemImage: "xmark")
+                    }
+                    #if targetEnvironment(macCatalyst)
+                    .keyboardShortcut(.cancelAction)
+                    #endif
+                }
+                ToolbarItem(placement: .primaryAction) {
+#if canImport(UIKit)
+                    if let uiImage = UIImage(named: art.imageName) {
+                        ShareLink(item: Image(uiImage: uiImage), preview: SharePreview(art.title, image: Image(uiImage: uiImage))) {
+                            Label("Share", systemImage: "square.and.arrow.up")
+                        }
+                    } else {
+                        ShareLink(item: art.title) {
+                            Label("Share", systemImage: "square.and.arrow.up")
+                        }
+                    }
+#else
+                    ShareLink(item: art.title) {
+                        Label("Share", systemImage: "square.and.arrow.up")
+                    }
+#endif
+                }
+            }
+#endif
         }
     }
 }
@@ -179,6 +379,5 @@ private struct FanArtDetailSheet: View {
 #Preview {
     NavigationStack {
         ArtView()
-            .environmentObject(ThemeManager())
     }
 }

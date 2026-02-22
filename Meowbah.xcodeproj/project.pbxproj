@@ -6,23 +6,155 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		9723B9F42F4AC48000F3B2E0 /* Meowbah Watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 9723B9EA2F4AC47F00F3B2E0 /* Meowbah Watch Watch App.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		977ABE122F4B1AA80006051A /* Meowbah Stickers.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 977ABE0B2F4B1AA70006051A /* Meowbah Stickers.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		97A449BC2F49D4530067EE52 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97A449BB2F49D4530067EE52 /* WidgetKit.framework */; };
+		97A449BE2F49D4530067EE52 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97A449BD2F49D4530067EE52 /* SwiftUI.framework */; };
+		97A449C92F49D4540067EE52 /* MeowbahWidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 97A449B92F49D4530067EE52 /* MeowbahWidgetExtensionExtension.appex */; platformFilters = (ios, maccatalyst, xros, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		97A449D02F49D4710067EE52 /* WidgetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A449CF2F49D4680067EE52 /* WidgetHelper.swift */; };
+		97A449D12F49D6ED0067EE52 /* WidgetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A449CF2F49D4680067EE52 /* WidgetHelper.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9723B9F22F4AC48000F3B2E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 977ABDEE2F47C75C006F399F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9723B9E92F4AC47F00F3B2E0;
+			remoteInfo = "Meowbah Watch Watch App";
+		};
+		977ABE102F4B1AA80006051A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 977ABDEE2F47C75C006F399F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 977ABE0A2F4B1AA70006051A;
+			remoteInfo = "Meowbah Stickers";
+		};
+		97A449C72F49D4540067EE52 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 977ABDEE2F47C75C006F399F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 97A449B82F49D4530067EE52;
+			remoteInfo = MeowbahWidgetExtensionExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9723B9F52F4AC48000F3B2E0 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				9723B9F42F4AC48000F3B2E0 /* Meowbah Watch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97A449CE2F49D4540067EE52 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				97A449C92F49D4540067EE52 /* MeowbahWidgetExtensionExtension.appex in Embed Foundation Extensions */,
+				977ABE122F4B1AA80006051A /* Meowbah Stickers.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		9723B9EA2F4AC47F00F3B2E0 /* Meowbah Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Meowbah Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		977ABDF62F47C75C006F399F /* Meowbah.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meowbah.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		977ABDF72F4B1A3A0006051A /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = Library/Frameworks/Messages.framework; sourceTree = DEVELOPER_DIR; };
+		977ABE0B2F4B1AA70006051A /* Meowbah Stickers.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Meowbah Stickers.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		97A449B92F49D4530067EE52 /* MeowbahWidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MeowbahWidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		97A449BB2F49D4530067EE52 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		97A449BD2F49D4530067EE52 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		97A449CF2F49D4680067EE52 /* WidgetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetHelper.swift; sourceTree = "<group>"; };
+		97A449D22F49D7F80067EE52 /* MeowbahWidgetExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeowbahWidgetExtensionExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		977ABE162F4B1AA80006051A /* Exceptions for "Meowbah Stickers" folder in "Meowbah Stickers" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 977ABE0A2F4B1AA70006051A /* Meowbah Stickers */;
+		};
+		97A449CD2F49D4540067EE52 /* Exceptions for "MeowbahWidgetExtension" folder in "MeowbahWidgetExtensionExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 97A449B82F49D4530067EE52 /* MeowbahWidgetExtensionExtension */;
+		};
+		97A853FB2F4933140013CAF2 /* Exceptions for "Meowbah" folder in "Meowbah" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 977ABDF52F47C75C006F399F /* Meowbah */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		9723B9EB2F4AC47F00F3B2E0 /* Meowbah Watch Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Meowbah Watch Watch App";
+			sourceTree = "<group>";
+		};
 		977ABDF82F47C75C006F399F /* Meowbah */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				97A853FB2F4933140013CAF2 /* Exceptions for "Meowbah" folder in "Meowbah" target */,
+			);
 			path = Meowbah;
+			sourceTree = "<group>";
+		};
+		977ABE0C2F4B1AA70006051A /* Meowbah Stickers */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				977ABE162F4B1AA80006051A /* Exceptions for "Meowbah Stickers" folder in "Meowbah Stickers" target */,
+			);
+			path = "Meowbah Stickers";
+			sourceTree = "<group>";
+		};
+		97A449BF2F49D4530067EE52 /* MeowbahWidgetExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				97A449CD2F49D4540067EE52 /* Exceptions for "MeowbahWidgetExtension" folder in "MeowbahWidgetExtensionExtension" target */,
+			);
+			path = MeowbahWidgetExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9723B9E72F4AC47F00F3B2E0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		977ABDF32F47C75C006F399F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97A449B62F49D4530067EE52 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97A449BE2F49D4530067EE52 /* SwiftUI.framework in Frameworks */,
+				97A449BC2F49D4530067EE52 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,8 +164,14 @@
 		977ABDED2F47C75C006F399F = {
 			isa = PBXGroup;
 			children = (
+				97A449D22F49D7F80067EE52 /* MeowbahWidgetExtensionExtension.entitlements */,
 				977ABDF82F47C75C006F399F /* Meowbah */,
+				97A449BF2F49D4530067EE52 /* MeowbahWidgetExtension */,
+				9723B9EB2F4AC47F00F3B2E0 /* Meowbah Watch Watch App */,
+				977ABE0C2F4B1AA70006051A /* Meowbah Stickers */,
+				97A449BA2F49D4530067EE52 /* Frameworks */,
 				977ABDF72F47C75C006F399F /* Products */,
+				97A449CF2F49D4680067EE52 /* WidgetHelper.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -41,13 +179,48 @@
 			isa = PBXGroup;
 			children = (
 				977ABDF62F47C75C006F399F /* Meowbah.app */,
+				97A449B92F49D4530067EE52 /* MeowbahWidgetExtensionExtension.appex */,
+				9723B9EA2F4AC47F00F3B2E0 /* Meowbah Watch Watch App.app */,
+				977ABE0B2F4B1AA70006051A /* Meowbah Stickers.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		97A449BA2F49D4530067EE52 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				97A449BB2F49D4530067EE52 /* WidgetKit.framework */,
+				97A449BD2F49D4530067EE52 /* SwiftUI.framework */,
+				977ABDF72F4B1A3A0006051A /* Messages.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9723B9E92F4AC47F00F3B2E0 /* Meowbah Watch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9723B9F82F4AC48000F3B2E0 /* Build configuration list for PBXNativeTarget "Meowbah Watch Watch App" */;
+			buildPhases = (
+				9723B9E62F4AC47F00F3B2E0 /* Sources */,
+				9723B9E72F4AC47F00F3B2E0 /* Frameworks */,
+				9723B9E82F4AC47F00F3B2E0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				9723B9EB2F4AC47F00F3B2E0 /* Meowbah Watch Watch App */,
+			);
+			name = "Meowbah Watch Watch App";
+			packageProductDependencies = (
+			);
+			productName = "Meowbah Watch Watch App";
+			productReference = 9723B9EA2F4AC47F00F3B2E0 /* Meowbah Watch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		977ABDF52F47C75C006F399F /* Meowbah */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 977ABE012F47C75D006F399F /* Build configuration list for PBXNativeTarget "Meowbah" */;
@@ -55,10 +228,15 @@
 				977ABDF22F47C75C006F399F /* Sources */,
 				977ABDF32F47C75C006F399F /* Frameworks */,
 				977ABDF42F47C75C006F399F /* Resources */,
+				97A449CE2F49D4540067EE52 /* Embed Foundation Extensions */,
+				9723B9F52F4AC48000F3B2E0 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				97A449C82F49D4540067EE52 /* PBXTargetDependency */,
+				9723B9F32F4AC48000F3B2E0 /* PBXTargetDependency */,
+				977ABE112F4B1AA80006051A /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				977ABDF82F47C75C006F399F /* Meowbah */,
@@ -70,6 +248,48 @@
 			productReference = 977ABDF62F47C75C006F399F /* Meowbah.app */;
 			productType = "com.apple.product-type.application";
 		};
+		977ABE0A2F4B1AA70006051A /* Meowbah Stickers */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 977ABE132F4B1AA80006051A /* Build configuration list for PBXNativeTarget "Meowbah Stickers" */;
+			buildPhases = (
+				977ABE092F4B1AA70006051A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				977ABE0C2F4B1AA70006051A /* Meowbah Stickers */,
+			);
+			name = "Meowbah Stickers";
+			packageProductDependencies = (
+			);
+			productName = "Meowbah Stickers";
+			productReference = 977ABE0B2F4B1AA70006051A /* Meowbah Stickers.appex */;
+			productType = "com.apple.product-type.app-extension.messages-sticker-pack";
+		};
+		97A449B82F49D4530067EE52 /* MeowbahWidgetExtensionExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97A449CA2F49D4540067EE52 /* Build configuration list for PBXNativeTarget "MeowbahWidgetExtensionExtension" */;
+			buildPhases = (
+				97A449B52F49D4530067EE52 /* Sources */,
+				97A449B62F49D4530067EE52 /* Frameworks */,
+				97A449B72F49D4530067EE52 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				97A449BF2F49D4530067EE52 /* MeowbahWidgetExtension */,
+			);
+			name = MeowbahWidgetExtensionExtension;
+			packageProductDependencies = (
+			);
+			productName = MeowbahWidgetExtensionExtension;
+			productReference = 97A449B92F49D4530067EE52 /* MeowbahWidgetExtensionExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -80,7 +300,16 @@
 				LastSwiftUpdateCheck = 2640;
 				LastUpgradeCheck = 2640;
 				TargetAttributes = {
+					9723B9E92F4AC47F00F3B2E0 = {
+						CreatedOnToolsVersion = 26.4;
+					};
 					977ABDF52F47C75C006F399F = {
+						CreatedOnToolsVersion = 26.4;
+					};
+					977ABE0A2F4B1AA70006051A = {
+						CreatedOnToolsVersion = 26.4;
+					};
+					97A449B82F49D4530067EE52 = {
 						CreatedOnToolsVersion = 26.4;
 					};
 				};
@@ -100,12 +329,36 @@
 			projectRoot = "";
 			targets = (
 				977ABDF52F47C75C006F399F /* Meowbah */,
+				97A449B82F49D4530067EE52 /* MeowbahWidgetExtensionExtension */,
+				9723B9E92F4AC47F00F3B2E0 /* Meowbah Watch Watch App */,
+				977ABE0A2F4B1AA70006051A /* Meowbah Stickers */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9723B9E82F4AC47F00F3B2E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		977ABDF42F47C75C006F399F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		977ABE092F4B1AA70006051A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97A449B72F49D4530067EE52 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -115,16 +368,124 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		977ABDF22F47C75C006F399F /* Sources */ = {
+		9723B9E62F4AC47F00F3B2E0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		977ABDF22F47C75C006F399F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97A449D02F49D4710067EE52 /* WidgetHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97A449B52F49D4530067EE52 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97A449D12F49D6ED0067EE52 /* WidgetHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		9723B9F32F4AC48000F3B2E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 9723B9E92F4AC47F00F3B2E0 /* Meowbah Watch Watch App */;
+			targetProxy = 9723B9F22F4AC48000F3B2E0 /* PBXContainerItemProxy */;
+		};
+		977ABE112F4B1AA80006051A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 977ABE0A2F4B1AA70006051A /* Meowbah Stickers */;
+			targetProxy = 977ABE102F4B1AA80006051A /* PBXContainerItemProxy */;
+		};
+		97A449C82F49D4540067EE52 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilters = (
+				ios,
+				maccatalyst,
+				xros,
+			);
+			target = 97A449B82F49D4530067EE52 /* MeowbahWidgetExtensionExtension */;
+			targetProxy = 97A449C72F49D4540067EE52 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		9723B9F62F4AC48000F3B2E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DPP2BPJ42N;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Meowbah;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.UwU.Meowbah;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.UwU.Meowbah.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.4;
+			};
+			name = Debug;
+		};
+		9723B9F72F4AC48000F3B2E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DPP2BPJ42N;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Meowbah;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.UwU.Meowbah;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.UwU.Meowbah.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 26.4;
+			};
+			name = Release;
+		};
 		977ABDFF2F47C75D006F399F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -244,6 +605,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Meowbah/Meowbah.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DPP2BPJ42N;
@@ -261,16 +623,19 @@
 				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Meowbah/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -299,6 +664,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Meowbah/Meowbah.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DPP2BPJ42N;
@@ -316,16 +682,19 @@
 				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Meowbah/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -349,9 +718,152 @@
 			};
 			name = Release;
 		};
+		977ABE142F4B1AA80006051A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DPP2BPJ42N;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Meowbah Stickers/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Meowbah Stickers";
+				INFOPLIST_KEY_NSStickerSharingLevel = OS;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.UwU.Meowbah.Meowbah-Stickers";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+			};
+			name = Debug;
+		};
+		977ABE152F4B1AA80006051A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DPP2BPJ42N;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Meowbah Stickers/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Meowbah Stickers";
+				INFOPLIST_KEY_NSStickerSharingLevel = OS;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.UwU.Meowbah.Meowbah-Stickers";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		97A449CB2F49D4540067EE52 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = MeowbahWidgetExtensionExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DPP2BPJ42N;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MeowbahWidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MeowbahWidgetExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.UwU.Meowbah.MeowbahWidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = xros;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 26.4;
+			};
+			name = Debug;
+		};
+		97A449CC2F49D4540067EE52 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = MeowbahWidgetExtensionExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DPP2BPJ42N;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MeowbahWidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MeowbahWidgetExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.UwU.Meowbah.MeowbahWidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = xros;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				VALIDATE_PRODUCT = YES;
+				XROS_DEPLOYMENT_TARGET = 26.4;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9723B9F82F4AC48000F3B2E0 /* Build configuration list for PBXNativeTarget "Meowbah Watch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9723B9F62F4AC48000F3B2E0 /* Debug */,
+				9723B9F72F4AC48000F3B2E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		977ABDF12F47C75C006F399F /* Build configuration list for PBXProject "Meowbah" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -366,6 +878,24 @@
 			buildConfigurations = (
 				977ABE022F47C75D006F399F /* Debug */,
 				977ABE032F47C75D006F399F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		977ABE132F4B1AA80006051A /* Build configuration list for PBXNativeTarget "Meowbah Stickers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				977ABE142F4B1AA80006051A /* Debug */,
+				977ABE152F4B1AA80006051A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		97A449CA2F49D4540067EE52 /* Build configuration list for PBXNativeTarget "MeowbahWidgetExtensionExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97A449CB2F49D4540067EE52 /* Debug */,
+				97A449CC2F49D4540067EE52 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

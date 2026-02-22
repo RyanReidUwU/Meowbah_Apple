@@ -8,12 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject private var theme: ThemeManager
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
-        let palette = theme.palette(for: colorScheme)
-
         TabView {
             VideosView()
                 .tabItem {
@@ -32,12 +29,9 @@ struct ContentView: View {
             */
         }
         .background(Color.clear)      // ensure TabView doesn't paint a bg
-        .tint(palette.primary)
-        .accentColor(palette.primary)
     }
 }
 
 #Preview {
     ContentView()
-        .environmentObject(ThemeManager())
 }

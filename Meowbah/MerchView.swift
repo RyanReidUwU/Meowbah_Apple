@@ -5,10 +5,34 @@
 //  Created by Ryan Reid on 20/02/2026.
 //
 
+
 import SwiftUI
 #if canImport(UIKit)
 import UIKit
 #endif
+
+// MARK: - Platform-safe system colors
+private enum PlatformColors {
+    static var systemBackground: Color {
+        #if os(tvOS)
+        return Color.black
+        #elseif canImport(UIKit)
+        return Color(UIColor.systemBackground)
+        #else
+        return Color(.windowBackgroundColor)
+        #endif
+    }
+
+    static var secondaryBackground: Color {
+        #if os(tvOS)
+        return Color.black.opacity(0.22)
+        #elseif canImport(UIKit)
+        return Color(UIColor.secondarySystemBackground)
+        #else
+        return Color.gray.opacity(0.15)
+        #endif
+    }
+}
 
 struct MerchView: View {
 
@@ -28,26 +52,43 @@ struct MerchView: View {
     @State private var merchItems: [MerchItem] = SampleMerchData.items
 
     @State private var selectedMerch: MerchItem?
+    @State private var selectedFilter: String? = "All"
 
-    @EnvironmentObject private var theme: ThemeManager
-    @Environment(\.colorScheme) private var colorScheme
+    private static let presetFilters: [String] = [
+        "All",
+        "Hoodies",
+        "Sweatshirts",
+        "Jackets",
+        "Shirts",
+        "Posters",
+        "Stickers",
+        "Mugs & Cups",
+        "Cases",
+        "Notebooks & Journals",
+        "Pins & Patches",
+        "Magnets",
+        "Blankets",
+        "Pillows",
+        "Flags",
+        "Keychains",
+        "Other"
+    ]
 
     var body: some View {
-        let palette = theme.palette(for: colorScheme)
-
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                header(palette: palette)
+                header()
+                aiFiltersBar()
 
                 LazyVGrid(columns: gridColumns, spacing: 16) {
-                    ForEach(merchItems) { item in
+                    ForEach(filteredItems) { item in
                         VStack(alignment: .leading, spacing: 8) {
                             RoundedRectangle(cornerRadius: 12)
-                                .fill(palette.card)
+                                .fill(PlatformColors.secondaryBackground)
                                 .overlay(
                                     ZStack {
                                         LinearGradient(
-                                            colors: [palette.primary.opacity(0.25), palette.card.opacity(0.2)],
+                                            colors: [Color.primary.opacity(0.15), PlatformColors.secondaryBackground.opacity(0.2)],
                                             startPoint: .topLeading,
                                             endPoint: .bottomTrailing
                                         )
@@ -62,7 +103,7 @@ struct MerchView: View {
                                         } else {
                                             Image(systemName: "bag")
                                                 .font(.system(size: 28))
-                                                .foregroundStyle(palette.textSecondary)
+                                                .foregroundStyle(Color.secondary)
                                                 .opacity(0.25)
                                         }
 #else
@@ -78,16 +119,16 @@ struct MerchView: View {
 
                             Text(item.name)
                                 .font(.headline)
-                                .foregroundStyle(palette.textPrimary)
+                                .foregroundStyle(Color.primary)
                                 .lineLimit(2)
 
                             Text(item.price)
                                 .font(.subheadline)
-                                .foregroundStyle(palette.textSecondary)
+                                .foregroundStyle(Color.secondary)
                                 .lineLimit(1)
                         }
                         .padding(12)
-                        .background(palette.card)
+                        .background(PlatformColors.secondaryBackground)
                         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                         .shadow(radius: 4, y: 2)
                         .contentShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
@@ -100,28 +141,151 @@ struct MerchView: View {
             }
             .padding(16)
         }
-        .background(palette.background.ignoresSafeArea())
+        .background(PlatformColors.systemBackground.ignoresSafeArea())
+#if !os(tvOS)
+        .navigationTitle("Merch")
+#endif
         .sheet(item: $selectedMerch) { item in
             MerchDetailSheet(item: item)
-                .environmentObject(theme)
         }
     }
+
+    private var filteredItems: [MerchItem] {
+        guard let selectedFilter, !selectedFilter.isEmpty, selectedFilter != "All" else {
+            return merchItems
+        }
+
+        func contains(_ item: MerchItem, _ needle: String) -> Bool {
+            let text = (item.name + " " + item.description).lowercased()
+            return text.contains(needle)
+        }
+
+        return merchItems.filter { item in
+            switch selectedFilter {
+            case "Hoodies":
+                return contains(item, "hoodie")
+            case "Sweatshirts":
+                return contains(item, "sweatshirt")
+            case "Jackets":
+                return contains(item, "jacket")
+            case "Shirts":
+                return contains(item, "shirt") || contains(item, "budget shirt")
+            case "Posters":
+                return contains(item, "poster")
+            case "Stickers":
+                return contains(item, "sticker")
+            case "Mugs & Cups":
+                return contains(item, "mug") || contains(item, "cup")
+            case "Cases":
+                return contains(item, "case")
+            case "Notebooks & Journals":
+                return contains(item, "notebook") || contains(item, "journal")
+            case "Pins & Patches":
+                return contains(item, " pin") || contains(item, "pin ") || contains(item, "patch")
+            case "Magnets":
+                return contains(item, "magnet")
+            case "Blankets":
+                return contains(item, "blanket")
+            case "Pillows":
+                return contains(item, "pillow") || contains(item, "dakimakura")
+            case "Flags":
+                return contains(item, "flag")
+            case "Keychains":
+                return contains(item, "keychain")
+            case "Other":
+                // Anything that doesn't match the main buckets
+                let matchesKnown = (
+                    contains(item, "hoodie") ||
+                    contains(item, "sweatshirt") ||
+                    contains(item, "jacket") ||
+                    contains(item, "shirt") ||
+                    contains(item, "poster") ||
+                    contains(item, "sticker") ||
+                    contains(item, "mug") ||
+                    contains(item, "cup") ||
+                    contains(item, "case") ||
+                    contains(item, "notebook") ||
+                    contains(item, "journal") ||
+                    contains(item, "pin") ||
+                    contains(item, "patch") ||
+                    contains(item, "magnet") ||
+                    contains(item, "blanket") ||
+                    contains(item, "pillow") ||
+                    contains(item, "dakimakura") ||
+                    contains(item, "flag") ||
+                    contains(item, "keychain")
+                )
+                return !matchesKnown
+            default:
+                // Fallback: substring match
+                return contains(item, selectedFilter.lowercased())
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func aiFiltersBar() -> some View {
+        let filters = Self.presetFilters
+        if !filters.isEmpty {
+            VStack(alignment: .leading, spacing: 10) {
+                HStack(spacing: 8) {
+                    Text("Suggested filters")
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(Color.secondary)
+                    Spacer()
+                    if selectedFilter != nil && selectedFilter != "All" {
+                        Button("All") {
+                            selectedFilter = "All"
+                        }
+                        .font(.footnote.weight(.semibold))
+                        .buttonStyle(.plain)
+                        .foregroundStyle(Color.primary)
+                    }
+                }
+
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 10) {
+                        ForEach(filters, id: \.self) { filter in
+                            let isSelected = (selectedFilter == filter)
+                            Button {
+                                selectedFilter = isSelected ? "All" : filter
+                            } label: {
+                                Text(filter)
+                                    .font(.subheadline.weight(.semibold))
+                                    .lineLimit(1)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 8)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                            .fill(isSelected ? Color.primary.opacity(0.12) : PlatformColors.secondaryBackground)
+                                    )
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                            .stroke(isSelected ? Color.primary.opacity(0.35) : PlatformColors.secondaryBackground.opacity(0.0), lineWidth: 1)
+                                    )
+                                    .foregroundStyle(isSelected ? Color.primary : Color.primary)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .padding(.vertical, 2)
+                }
+            }
+            .padding(.top, 4)
+        }
+    }
+
 
     private var gridColumns: [GridItem] {
         [GridItem(.adaptive(minimum: 160), spacing: 16)]
     }
 
     @ViewBuilder
-    private func header(palette: ThemePalette) -> some View {
-        HStack(alignment: .firstTextBaseline) {
-            VStack(alignment: .leading, spacing: 6) {
-                Text("Merch")
-                    .font(.largeTitle).bold()
-                    .foregroundStyle(palette.textPrimary)
-                Text("Tap an item to view it larger")
-                    .font(.subheadline)
-                    .foregroundStyle(palette.textSecondary)
-            }
+    private func header() -> some View {
+        HStack {
+            Text("Tap an item to view it larger — or use filters below")
+                .font(.subheadline)
+                .foregroundStyle(Color.secondary)
             Spacer()
         }
     }
@@ -130,15 +294,12 @@ struct MerchView: View {
 private struct MerchDetailSheet: View {
     let item: MerchView.MerchItem
 
-    @EnvironmentObject private var theme: ThemeManager
-    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        let palette = theme.palette(for: colorScheme)
-
         NavigationStack {
             ZStack {
-                palette.background.ignoresSafeArea()
+                PlatformColors.systemBackground.ignoresSafeArea()
 
                 VStack(spacing: 16) {
                     GeometryReader { geo in
@@ -147,7 +308,7 @@ private struct MerchDetailSheet: View {
 
                         ZStack {
                             RoundedRectangle(cornerRadius: 16)
-                                .fill(palette.card)
+                                .fill(PlatformColors.secondaryBackground)
 
 #if canImport(UIKit)
                             if let uiImage = UIImage(named: item.imageName) {
@@ -159,7 +320,7 @@ private struct MerchDetailSheet: View {
                             } else {
                                 Image(systemName: "bag")
                                     .font(.system(size: 44))
-                                    .foregroundStyle(palette.textSecondary)
+                                    .foregroundStyle(Color.secondary)
                                     .opacity(0.25)
                             }
 #else
@@ -179,16 +340,16 @@ private struct MerchDetailSheet: View {
                         Text(item.name)
                             .font(.title3)
                             .bold()
-                            .foregroundStyle(palette.textPrimary)
+                            .foregroundStyle(Color.primary)
 
                         Text(item.price)
                             .font(.headline)
-                            .foregroundStyle(palette.primary)
+                            .foregroundStyle(Color.primary)
 
                         if !item.description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                             Text(item.description)
                                 .font(.body)
-                                .foregroundStyle(palette.textSecondary)
+                                .foregroundStyle(Color.secondary)
                                 .fixedSize(horizontal: false, vertical: true)
                         }
 
@@ -200,8 +361,8 @@ private struct MerchDetailSheet: View {
                                 }
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 12)
-                                .background(palette.primary.opacity(0.15))
-                                .foregroundStyle(palette.primary)
+                                .background(Color.primary.opacity(0.12))
+                                .foregroundStyle(Color.primary)
                                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                             }
                             .buttonStyle(.plain)
@@ -214,7 +375,25 @@ private struct MerchDetailSheet: View {
                 .padding(.top, 8)
             }
             .navigationTitle(item.name)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Close") {
+                        dismiss()
+                    }
+                }
+                #if !os(tvOS)
+                if let url = item.storeURL {
+                    ToolbarItem(placement: .primaryAction) {
+                        ShareLink(item: url) {
+                            Label("Share", systemImage: "square.and.arrow.up")
+                        }
+                    }
+                }
+                #endif
+            }
+#if !os(tvOS)
             .navigationBarTitleDisplayMode(.inline)
+#endif
         }
     }
 }
@@ -446,6 +625,5 @@ enum SampleMerchData {
 #Preview {
     NavigationStack {
         MerchView()
-            .environmentObject(ThemeManager())
     }
 }

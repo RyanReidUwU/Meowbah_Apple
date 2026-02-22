@@ -23,10 +23,12 @@ enum NotificationHelper {
         let center = UNUserNotificationCenter.current()
 
         let content = UNMutableNotificationContent()
+        #if !os(tvOS)
         content.title = "Nyaa~ New video just dropped!"
         content.body = video.title.isEmpty ? "Tap to watch meow!" : "“\(video.title)” is ready to watch. Tap to play!"
         content.sound = .default
         content.badge = NSNumber(value: 1)
+        #endif
 
         let request = UNNotificationRequest(
             identifier: "new-video-\(video.id)",
@@ -41,6 +43,7 @@ enum NotificationHelper {
         }
 
         // Optionally try to attach a thumbnail (best-effort)
+        #if !os(tvOS)
         if let url = video.thumbnailURL {
             Task.detached(priority: .utility) {
                 do {
@@ -69,6 +72,6 @@ enum NotificationHelper {
                 } catch { }
             }
         }
+        #endif
     }
 }
-

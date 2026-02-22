@@ -1,0 +1,41 @@
+{
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "grid-size" : "regular"
+  },
+  "stickers" : [
+    {
+      "filename" : "nyan.sticker"
+    },
+    {
+      "filename" : "plush-2.sticker"
+    },
+    {
+      "filename" : "girlgirl.sticker"
+    },
+    {
+      "filename" : "meowplush-2.sticker"
+    },
+    {
+      "filename" : "bodypillow.sticker"
+    },
+    {
+      "filename" : "meowmomo-2.sticker"
+    },
+    {
+      "filename" : "friends-2.sticker"
+    },
+    {
+      "filename" : "meowgod-2.sticker"
+    },
+    {
+      "filename" : "plush-2 1.sticker"
+    },
+    {
+      "filename" : "meowplush-2 1.sticker"
+    }
+  ]
+}

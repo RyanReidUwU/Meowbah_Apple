@@ -17,10 +17,13 @@ private struct GlassEffectModifier: ViewModifier {
 }
 
 private struct InteractivePressModifier: ViewModifier {
+    #if !os(tvOS)
     @GestureState private var isPressed = false
+    #endif
     let enabled: Bool
 
     func body(content: Content) -> some View {
+        #if !os(tvOS)
         if enabled {
             content
                 .scaleEffect(isPressed ? 0.98 : 1.0)
@@ -35,6 +38,10 @@ private struct InteractivePressModifier: ViewModifier {
         } else {
             content
         }
+        #else
+        // DragGesture is unavailable on tvOS; return content unchanged or apply a simple scale without gesture
+        content
+        #endif
     }
 }
 

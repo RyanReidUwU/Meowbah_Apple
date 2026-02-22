@@ -1,5 +1,7 @@
 import Foundation
+#if canImport(WidgetKit)
 import WidgetKit
+#endif
 #if os(iOS)
 import ActivityKit
 #endif
@@ -21,7 +23,9 @@ public struct SharedPhraseStore {
         defaults.set(phrase, forKey: defaultsKey)
 
         // Tell widgets to refresh if they display the phrase.
+        #if canImport(WidgetKit)
         WidgetCenter.shared.reloadAllTimelines()
+        #endif
 
         // Optionally update an existing Live Activity on iOS if available and type exists.
         #if os(iOS)
